@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="odiv"></div>
+    <button id="obtn">按钮</button>
+    <script>
+        let index = 0;
+
+        function handler() {
+            document.getElementById('odiv').innerText = ''
+            fetch('/data', {
+                headers: {
+                    'X-Test-Cache': index++
+                }
+            }).then(function (res) {
+                return res.text()
+            }).then(function (text) {
+                document.getElementById('odiv').innerText = text
+            })
+        }
+
+        document.getElementById('obtn').onclick = handler
+    </script>
+</body>
+
+</html>
